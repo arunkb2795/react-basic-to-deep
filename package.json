@@ -1,7 +1,6 @@
 {
   "name": "adopt-me",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -21,5 +20,14 @@
   },
   "browserslist": [
     "last 2 Chrome versions"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arunkb2795/react-basic-to-deep.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arunkb2795/react-basic-to-deep/issues"
+  },
+  "homepage": "https://github.com/arunkb2795/react-basic-to-deep#readme",
+  "description": ""
 }
