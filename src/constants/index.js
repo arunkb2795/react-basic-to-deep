@@ -1,2 +1,1 @@
-export const ANIMALS = ["Dog", "Cat", "Rabbit", "Bird", "Reptile"];
-export const BREEDS = ["Dog", "Cat", "Rabbit", "Bird", "Reptile"];
+export const ANIMALS = ["dog", "cat", "rabbit", "bird", "reptile"];

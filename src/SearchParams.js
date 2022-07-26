@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Pet from "./Pet";
-import { ANIMALS, BREEDS } from "./constants";
+import useBreedList from "./hooks/useBreedList";
+import { ANIMALS } from "./constants";
 
 export default function SearchParams() {
   const [location, setLocation] = useState("");
   const [animal, setAnimal] = useState("");
   const [breed, setBreed] = useState("");
   const [pets, setPets] = useState([]);
+  const breeds = useBreedList(animal);
+  console.log({ breeds });
 
   const requestPets = async () => {
     const res = await fetch(
@@ -22,7 +25,12 @@ export default function SearchParams() {
 
   return (
     <div>
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestPets();
+        }}
+      >
         <label htmlFor="search">
           Search
           <input
@@ -54,7 +62,7 @@ export default function SearchParams() {
             <option />
             {ANIMALS.map((animal) => (
               <option key={animal} value={animal}>
-                {animal}
+                {animal.charAt(0).toUpperCase() + animal.slice(1)}
               </option>
             ))}
           </select>
@@ -74,7 +82,7 @@ export default function SearchParams() {
             }}
           >
             <option />
-            {BREEDS.map((breed) => (
+            {breeds.map((breed) => (
               <option key={breed} value={breed}>
                 {breed}
               </option>
@@ -83,14 +91,19 @@ export default function SearchParams() {
         </label>
         <button type="submit">Search</button>
       </form>
-      {pets.map((pet) => (
-        <Pet
-          key={pet.id}
-          name={pet.name}
-          animal={pet.animal}
-          breed={pet.breed}
-        />
-      ))}
+      {pets.length ? (
+        pets.map((pet) => (
+          <Pet
+            key={pet.id}
+            name={pet.name}
+            animal={pet.animal}
+            breed={pet.breed}
+            images={pet.images}
+          />
+        ))
+      ) : (
+        <div>No pets found!</div>
+      )}
     </div>
   );
 }
